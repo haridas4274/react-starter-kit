@@ -1,5 +1,12 @@
 import { InertiaLinkProps } from '@inertiajs/react';
+import Echo from 'laravel-echo';
 import { LucideIcon } from 'lucide-react';
+
+declare global {
+    interface Window {
+        Echo: Echo;
+    }
+}
 
 export interface Auth {
     user: User;
