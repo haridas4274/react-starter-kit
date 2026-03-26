@@ -84,8 +84,8 @@ class SecurityTest extends TestCase
             ->assertInertia(fn (Assert $page) => $page
                 ->component('settings/security')
                 ->where('canManageTwoFactor', false)
-                ->missing('twoFactorEnabled')
-                ->missing('requiresConfirmation'),
+                ->where('twoFactorEnabled', false)
+                ->where('requiresConfirmation', false),
             );
     }
 
