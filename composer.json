@@ -15,10 +15,12 @@
         "laravel/framework": "^13.0",
         "laravel/tinker": "^3.0",
         "laravel/wayfinder": "dev-next",
+        "spatie/laravel-permission": "^7.2",
         "stancl/tenancy": "^3.10"
     },
     "require-dev": {
         "fakerphp/faker": "^1.24",
+        "laravel/boost": "^2.4",
         "laravel/pail": "^1.2.5",
         "laravel/pint": "^1.27",
         "laravel/sail": "^1.53",
