@@ -10,6 +10,7 @@ use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\SetSessionDomainFromRequestHost;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
+use Stancl\Tenancy\Middleware\InitializeTenancyBySubdomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -39,10 +40,15 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->name('tenant.')
                 ->group(base_path('routes/tenant.php'));
         },
+        
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->encryptCookies(except: ['appearance', 'sidebar_state']);
 
+        $middleware->group('universal', [
+            InitializeTenancyByDomain::class,
+            InitializeTenancyBySubdomain::class,
+        ]);
         $middleware->web(prepend: [
             SetSessionDomainFromRequestHost::class,
         ], append: [

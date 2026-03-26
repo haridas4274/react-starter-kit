@@ -4,7 +4,10 @@ use App\Http\Controllers\Central\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // Route::get('/', function () {
+    //     return 'central home page ' . tenant('id');
+    // });
     Route::get('/users', function () {
         return 'Central Users Area';
     })->name('users.index');
