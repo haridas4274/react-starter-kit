@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('tenant_id')->nullable()->after('id')->constrained('tenants')->nullOnDelete();
-            $table->index(['tenant_id', 'email']);
+            $table->string('tenant_id', 36)->nullable()->after('id');
+            $table->foreign('tenant_id')->references('id')->on('tenants')->nullOnDelete();
+            $table->index('tenant_id');
         });
     }
 
@@ -23,8 +24,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropIndex(['tenant_id', 'email']);
-            $table->dropConstrainedForeignId('tenant_id');
+            $table->dropIndex(['tenant_id']);
+            $table->dropForeign(['tenant_id']);
+            $table->dropColumn('tenant_id');
         });
     }
 };

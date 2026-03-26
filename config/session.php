@@ -156,7 +156,15 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN'),
+    'domain' => (static function (): ?string {
+        $domain = env('SESSION_DOMAIN');
+
+        if (! is_string($domain) || $domain === '') {
+            return null;
+        }
+
+        return $domain;
+    })(),
 
     /*
     |--------------------------------------------------------------------------

@@ -10,14 +10,12 @@ class CreateDomainsTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up(): void
     {
         Schema::create('domains', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('domain', 255)->unique();
+            $table->string('domain', 191)->unique();
             $table->string('tenant_id');
 
             $table->timestamps();
@@ -27,8 +25,6 @@ class CreateDomainsTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down(): void
     {
